@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eduit11.themoviedb.Actividades.MainActivity"
-    >
+    android:background="@drawable/cine2"
+
+    tools:context="eduit11.themoviedb.Actividades.TemporadasActivity">
+
 
 
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/listr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bb"
         android:divider="@color/colorPrimary"
-        android:dividerHeight="1.2dp">
+        android:dividerHeight="1dp"></ListView>
 
-
-    </ListView>
-
-
-</LinearLayout>
+</RelativeLayout>

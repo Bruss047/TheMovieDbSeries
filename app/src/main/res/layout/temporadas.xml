@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:id="@+id/snumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/color"
+        android:text="date"/>
+
+
+
+
+    <TextView
+        android:id="@+id/ecount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/snumber"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="15dp"
+        android:text="senum"/>
+
+
+    <TextView
+        android:id="@+id/airdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@id/ecount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="15dp"
+        android:text="count"/>
+
+
+
+
+</RelativeLayout>

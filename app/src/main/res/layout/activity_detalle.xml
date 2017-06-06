@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eduit11.themoviedb.MainActivity">
-
-
-
+    tools:context="eduit11.themoviedb.Actividades.MainActivity">
 
 
     <ListView
@@ -15,57 +11,73 @@
         android:id="@+id/viewlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:background="@drawable/bb">
 
 
     </ListView>
+
 
     <TextView
 
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:background="@drawable/borde"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/average"
-        android:text="FF"
-        android:textSize="18dp"
-        android:layout_below="@+id/titulo"
-        android:layout_alignLeft="@+id/titulo"
-        android:layout_alignStart="@+id/titulo" />
-
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/titulo"
-        android:text="titulo"
-        android:textSize="24dp"
-        android:layout_marginRight="42dp"
-        android:layout_marginEnd="42dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textColor="@color/color"
+        android:background="@color/detalle"/>
 
     <ImageView
 
         android:id="@+id/thumb"
         android:layout_width="110dp"
         android:layout_height="120dp"
+
         android:layout_above="@+id/viewlist"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="5dp" />
+    />
+
+    <TextView
+
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/color"
+        android:layout_toRightOf="@id/thumb"
+        android:text="titulo"
+        android:textSize="24dp" />
+
+
+    <TextView
+
+        android:id="@+id/average"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titulo"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/color"
+        android:layout_toRightOf="@id/thumb"
+        android:text="FF"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/boton"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/average"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/thumb"
+        android:background="@android:color/holo_red_dark"
+        android:text="Temporadas"
+        android:textColor="@color/color"
+        android:textSize="15dp" />
 
 
 </RelativeLayout>

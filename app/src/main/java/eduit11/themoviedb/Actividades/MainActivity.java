@@ -1,37 +1,30 @@
-package eduit11.themoviedb;
+package eduit11.themoviedb.Actividades;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Parcelable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.ResponseHandlerInterface;
-import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
+import java.util.Collections;
+import java.util.Comparator;
 import cz.msebera.android.httpclient.Header;
+import eduit11.themoviedb.Adapters.SeriesAdapter;
+import eduit11.themoviedb.R;
+import eduit11.themoviedb.SeriesTV;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private SeriesAdapter seriesAdapter;
-
 
 
     @Override
@@ -39,12 +32,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("  Series Más Populares");
+        getSupportActionBar().setIcon(R.drawable.tvv);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         final ListView listview = (ListView) findViewById(R.id.listview);
 
 
-
-        seriesAdapter = new SeriesAdapter(listaImagenes,MainActivity.this);
+        seriesAdapter = new SeriesAdapter(listaSeries, MainActivity.this);
         listview.setAdapter(seriesAdapter);
 
 
@@ -59,14 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent detalle = new Intent(MainActivity.this, DetalleActivity.class);
                 detalle.putExtra("id", seriesTV.getId());
 
-                detalle.putExtra("original_name",seriesTV.getOriginalName());
+                detalle.putExtra("original_name", seriesTV.getOriginalName());
 
-                detalle.putExtra("vote_average",seriesTV.getVoteAverage());
+                detalle.putExtra("vote_average", seriesTV.getVoteAverage());
 
-                detalle.putExtra("poster_path",seriesTV.getPosterPath());
-
-
-
+                detalle.putExtra("poster_path", seriesTV.getPosterPath());
 
 
                 startActivity(detalle);
@@ -75,21 +69,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-    private ArrayList<SeriesTV> listaImagenes = new ArrayList<>();
+    private ArrayList<SeriesTV> listaSeries = new ArrayList<>();
 
     private void descargarImagenes() {
 
         final ProgressDialog progress = new ProgressDialog(this);
-        progress.setMessage("Cargando...");
+        progress.setMessage("CARGANDO...");
         progress.setCancelable(false);
         progress.show();
 
+
         AsyncHttpClient client = new AsyncHttpClient();
-
-
 
 
         client.get("https://api.themoviedb.org/3/discover/tv?sort_by=popularity.desc&api_key=f766dd682018c893fe56d669309cec33", null, new JsonHttpResponseHandler() {
@@ -109,31 +99,35 @@ public class MainActivity extends AppCompatActivity {
                                     SeriesTV seriesTV = new SeriesTV();
 
                                     seriesTV.setId(resultados.getJSONObject(i).getLong("id"));
-                                    seriesTV.setOriginalName(resultados.getJSONObject(i).getString("original_name"));
                                     seriesTV.setPosterPath(resultados.getJSONObject(i).getString("poster_path"));
+                                    seriesTV.setOriginalName(resultados.getJSONObject(i).getString("original_name"));
+
                                     seriesTV.setVoteAverage(resultados.getJSONObject(i).getDouble("vote_average"));
 
 
+                                    listaSeries.add(seriesTV);
 
+                                    Collections.sort(listaSeries, new Comparator<SeriesTV>() {
 
-                            listaImagenes.add(seriesTV);
+                                        @Override
+                                        public int compare(SeriesTV s1, SeriesTV s2) {
 
+                                            return Double.compare(s2.getVoteAverage(), (s1.getVoteAverage()));
+                                        }
 
+                                    });
+
+                                }
+
+                                seriesAdapter.setImagenes(listaSeries);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
                         }
-
-
-
-
-                        seriesAdapter.setImagenes(listaImagenes);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-
                 }
-            }
-        }
 
         );
     }

@@ -1,8 +1,5 @@
 package eduit11.themoviedb;
 
-import android.text.Html;
-import android.widget.ImageView;
-
 /**
  * Created by Javi047 on 27/4/2017.
  */
@@ -13,42 +10,10 @@ public class SeriesTV {
     private String nombreReal;
     private String nombrePersonaje;
     private long id;
-    private long order;
-    private long gender;
-    private String creditId;
     private String originalName;
     private String posterPath;
     private double voteAverage;
 
-
-
-    public long getGender() {
-        return gender;
-    }
-
-    public void setGender(long gender) {
-        this.gender = gender;
-    }
-
-
-
-    public long getOrder() {
-        return order;
-    }
-
-    public void setOrder(long order) {
-        this.order = order;
-    }
-
-
-
-    public String getCreditId() {
-        return creditId;
-    }
-
-    public void setCreditId(String creditId) {
-        this.creditId = creditId;
-    }
 
     public String getNombrePersonaje() {
 

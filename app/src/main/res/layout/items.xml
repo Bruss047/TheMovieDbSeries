@@ -6,13 +6,14 @@
 
     <ImageView
         android:id="@+id/ff"
-        android:layout_width="71dp"
-        android:layout_height="71dp"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="2dp" />
+        android:layout_marginTop="2dp"
+        />
 
 
     <TextView
@@ -24,9 +25,10 @@
         android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/color"
         android:layout_toEndOf="@+id/ff"
         android:layout_toRightOf="@+id/ff"
+        android:layout_marginTop="16dp"
         android:text="sss"
         android:textSize="22dp" />
 
@@ -38,7 +40,7 @@
         android:layout_alignLeft="@+id/tvTitulo"
         android:layout_alignStart="@+id/tvTitulo"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/color"
         android:layout_toEndOf="@+id/ff"
         android:layout_toRightOf="@+id/ff"
         android:text="CC"

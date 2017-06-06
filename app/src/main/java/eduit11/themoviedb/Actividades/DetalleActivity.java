@@ -1,23 +1,22 @@
-package eduit11.themoviedb;
+package eduit11.themoviedb.Actividades;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.ResponseHandlerInterface;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -27,19 +26,35 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import eduit11.themoviedb.Adapters.CastAdapter;
+import eduit11.themoviedb.R;
+import eduit11.themoviedb.SeriesTV;
 
 public class DetalleActivity extends AppCompatActivity {
 
     private CastAdapter castAdapter;
     private Context context;
+    private Button boton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("  Casting");
+        getSupportActionBar().setIcon(R.drawable.casting);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);//muestra el icono
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//activa la flecha back.
+
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .build();
+        ImageLoader.getInstance().init(config);
+
 
         final ListView listview = (ListView) findViewById(R.id.viewlist);
+        boton = (Button) findViewById(R.id.boton);
 
 
         castAdapter = new CastAdapter(reparto, DetalleActivity.this);
@@ -48,10 +63,28 @@ public class DetalleActivity extends AppCompatActivity {
 
         descargarReparto();
 
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent a = new Intent(DetalleActivity.this, TemporadasActivity.class);
+                Bundle extras = getIntent().getExtras();
+                a.putExtra("id", extras.getLong("id"));
+
+                startActivity(a);
+
+
+            }
+        });
+
+
     }
+
+    ;
 
 
     private ArrayList<SeriesTV> reparto = new ArrayList<>();
+
 
     private void descargarReparto() {
 
@@ -75,13 +108,18 @@ public class DetalleActivity extends AppCompatActivity {
         TextView serie = (TextView) findViewById(R.id.titulo);
         serie.setText(titulo);
 
+
         ImageView thumb = (ImageView) findViewById(R.id.thumb);
+
 
         String URLe = "https://image.tmdb.org/t/p/original";
 
-        Picasso.with(context)
+       /* Picasso.with(context)
                 .load(URLe + thumbnail)
-                .into(thumb);
+                .into(thumb);*/
+
+
+        ImageLoader.getInstance().displayImage(URLe + thumbnail, thumb);
 
 
         TextView promedio = (TextView) findViewById(R.id.average);
@@ -92,10 +130,9 @@ public class DetalleActivity extends AppCompatActivity {
         String cadena = Long.toString(sId);
 
 
-
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get("https://api.themoviedb.org/3/tv/" + cadena + "/credits?api_key=f766dd682018c893fe56d669309cec33", null, new JsonHttpResponseHandler() {
+        client.get("https://api.themoviedb.org/3/tv/" + cadena + "/credits?api_key=f766dd682018c893fe56d669309cec33", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
 
@@ -133,3 +170,4 @@ public class DetalleActivity extends AppCompatActivity {
         });
     }
 }
+
